@@ -21,4 +21,14 @@ public enum Role {
     public void setRole(String role) {
         this.role = role;
     }
+
+    public static Role fromString(String role) {
+        if(role != null) {
+            for(Role roleValues : Role.values()) {
+                return roleValues;
+            }
+        }
+        return null;
+    }
+
 }
