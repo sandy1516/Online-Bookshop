@@ -12,12 +12,10 @@ import java.util.List;
 public class UserService {
 
     private UserDAO userDAO;
-    private static Service service;
 
     @Inject
-    public UserService(UserDAO userDAO, Service service) {
+    public UserService(UserDAO userDAO) {
         this.userDAO = userDAO;
-        this.service = service;
     }
 
     public User get(long id) {
@@ -27,10 +25,6 @@ public class UserService {
     public Long create(User user) {
         Long id = userDAO.create(user);
         user.setId(id);
-        user.setCreatedAt(service.getCreatedAt());
-        user.setCreatedBy(null);
-        user.setUpdatedAt(service.getUpdatedAt());
-        user.setUpdatedBy(null);
         return id;
     }
 
