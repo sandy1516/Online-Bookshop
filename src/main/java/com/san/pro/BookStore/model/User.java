@@ -1,4 +1,7 @@
 package com.san.pro.BookStore.model;
+
+import com.google.common.base.Objects;
+
 /**
  * Created by Administrator on 21-10-2015.
  */
@@ -75,5 +78,33 @@ public class User extends Model {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public void merge(User user) {
+        if(!Objects.equal(null, user.getFirstName())) {
+            this.setFirstName(user.getFirstName());
+        }
+        if(!Objects.equal(null, user.getMiddleName())) {
+            this.setMiddleName(user.getMiddleName());
+        }
+        if(!Objects.equal(null, user.getLastName())) {
+            this.setLastName(user.getLastName());
+        }
+        if(!Objects.equal(null, user.getEmailId())) {
+            this.setEmailId(user.getEmailId());
+        }
+        if(!Objects.equal(null, user.getMobile())) {
+            this.setMobile(user.getMobile());
+        }
+        if(!Objects.equal(null, user.getUserName())) {
+            this.setUserName(user.getUserName());
+        }
+        if(!Objects.equal(null, user.getPassword())) {
+            this.setPassword(user.getPassword());
+        }
+        if(!Objects.equal(null, user.getRole())) {
+            this.setRole(user.getRole());
+        }
+
     }
 }

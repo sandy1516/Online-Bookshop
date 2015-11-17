@@ -1,5 +1,6 @@
 package com.san.pro.BookStore.dao;
 
+import com.google.common.base.Optional;
 import com.san.pro.BookStore.mapper.UserMapper;
 import com.san.pro.BookStore.model.User;
 import org.skife.jdbi.v2.sqlobject.*;
@@ -16,11 +17,14 @@ public interface UserSQL {
     @GetGeneratedKeys
     Long create(@BindBean User user);
 
-    @SqlUpdate("UPDATE users set first_name = :firstName, middle_name =  :middleName, last_name = , :lastName, email_id = , :emailId, mobile = , :mobile, user_name = , :userName, password = :password, role = :role, updated_at = :updatedAt, updated_by = :updatedBy")
+    @SqlUpdate("UPDATE users set first_name = :firstName, middle_name =  :middleName, last_name = :lastName, email_id = :emailId, mobile = :mobile, user_name = :userName, password = :password, role = :role, updated_at = :updatedAt, updated_by = :updatedBy WHERE id = :id")
     long update(@BindBean User user);
 
     @SqlQuery("SELECT * from users where id = :id")
     User read(@Bind("id") Long id);
+
+    @SqlQuery("SELECT * from users where email_id = :emailId")
+    Optional<User> findByEmail(@Bind("emailId") String emailId);
 
     @SqlQuery("SELECT * FROM users")
     List<User> findAll();

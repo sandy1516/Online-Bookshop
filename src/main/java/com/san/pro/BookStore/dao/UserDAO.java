@@ -1,5 +1,6 @@
 package com.san.pro.BookStore.dao;
 
+import com.google.common.base.Optional;
 import com.san.pro.BookStore.mapper.UserMapper;
 import com.san.pro.BookStore.model.User;
 import org.skife.jdbi.v2.DBI;
@@ -55,6 +56,17 @@ public class UserDAO implements UserSQL {
             public User inTransaction(Handle handle, TransactionStatus transactionStatus) throws Exception {
                 UserSQL daoModel = handle.attach(UserSQL.class);
                 return daoModel.read(id);
+            }
+        });
+    }
+
+    @Override
+    public Optional<User> findByEmail(final String emailId) {
+        return getDBI().inTransaction(new TransactionCallback<Optional<User>>() {
+            @Override
+            public Optional<User> inTransaction(Handle handle, TransactionStatus transactionStatus) throws Exception {
+                UserSQL daoModel = handle.attach(UserSQL.class);
+                return daoModel.findByEmail(emailId);
             }
         });
     }

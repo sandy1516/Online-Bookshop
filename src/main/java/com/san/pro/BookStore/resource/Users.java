@@ -24,6 +24,7 @@ public class Users {
         this.userService = userService;
     }
 
+    @Path("/register")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -32,11 +33,20 @@ public class Users {
         return Response.status(Response.Status.CREATED).entity(user).build();
     }
 
+    @Path("/login")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response login(User user) {
+        userService.login(user);
+        return Response.status(Response.Status.OK).entity(user).build();
+    }
+
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getById(@PathParam("id") Long id) {
-        User user = userService.get(id);
+        User user = this.userService.get(id);
         return Response.status(Response.Status.OK).entity(user).build();
     }
 
@@ -48,8 +58,10 @@ public class Users {
     }
 
     @PUT
+    @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response update() {
-        return null;
+    public Response update(@PathParam("id") Long id, User user) {
+        userService.update(id, user);
+        return Response.status(Response.Status.OK).entity(user).build();
     }
 }
