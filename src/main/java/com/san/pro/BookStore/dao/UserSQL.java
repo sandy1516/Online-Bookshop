@@ -1,6 +1,5 @@
 package com.san.pro.BookStore.dao;
 
-import com.google.common.base.Optional;
 import com.san.pro.BookStore.mapper.UserMapper;
 import com.san.pro.BookStore.model.User;
 import org.skife.jdbi.v2.sqlobject.*;
@@ -24,9 +23,12 @@ public interface UserSQL {
     User read(@Bind("id") Long id);
 
     @SqlQuery("SELECT * from users where email_id = :emailId")
-    Optional<User> findByEmail(@Bind("emailId") String emailId);
+    User findByEmail(@Bind("emailId") String emailId);
 
     @SqlQuery("SELECT * FROM users")
     List<User> findAll();
+
+    @SqlUpdate("DELETE from users where id = :id")
+    void delete(@Bind("id") long id);
 
 }

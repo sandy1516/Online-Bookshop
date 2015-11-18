@@ -2,18 +2,28 @@ package com.san.pro.BookStore.model;
 
 import com.google.common.base.Objects;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * Created by Administrator on 21-10-2015.
  */
 public class User extends Model {
 
+    @NotNull
     private String firstName;
+    @NotNull
     private String middleName;
+    @NotNull
     private String lastName;
+    @NotNull
     private String emailId;
+    @NotNull
     private long mobile;
+    @NotNull
     private String userName;
+    @NotNull
     private String password;
+    @NotNull
     private Role role;
 
     public String getFirstName() {

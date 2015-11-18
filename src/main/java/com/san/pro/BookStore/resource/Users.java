@@ -3,6 +3,7 @@ package com.san.pro.BookStore.resource;
 import com.google.inject.Inject;
 import com.san.pro.BookStore.model.User;
 import com.san.pro.BookStore.service.UserService;
+import io.dropwizard.validation.Validated;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -28,7 +29,7 @@ public class Users {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response create(User user) {
+    public Response create(@Validated User user) {
         userService.create(user);
         return Response.status(Response.Status.CREATED).entity(user).build();
     }
@@ -37,16 +38,16 @@ public class Users {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response login(User user) {
-        userService.login(user);
+    public Response login(User model) {
+       User user = userService.login(model);
         return Response.status(Response.Status.OK).entity(user).build();
     }
 
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getById(@PathParam("id") Long id) {
-        User user = this.userService.get(id);
+    public Response get(@PathParam("id") Long id) {
+        User user = this.userService.getById(id);
         return Response.status(Response.Status.OK).entity(user).build();
     }
 
@@ -63,5 +64,12 @@ public class Users {
     public Response update(@PathParam("id") Long id, User user) {
         userService.update(id, user);
         return Response.status(Response.Status.OK).entity(user).build();
+    }
+
+    @DELETE
+    @Path("{id}")
+    public Response delete(@PathParam("id") Long id) {
+        userService.delete(id);
+        return Response.status(Response.Status.NO_CONTENT).build();
     }
 }

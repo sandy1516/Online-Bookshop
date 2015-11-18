@@ -1,6 +1,6 @@
 package com.san.pro.BookStore.service;
 
-import com.google.common.base.Optional;
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.san.pro.BookStore.dao.UserDAO;
 import com.san.pro.BookStore.model.User;
@@ -21,11 +21,11 @@ public class UserService {
         this.userDAO = userDAO;
     }
 
-    public User get(long id) {
+    public User getById(long id) {
         return userDAO.read(id);
     }
 
-    public Optional<User> getByEmail(String email) {
+    public User getByEmail(String email) {
         return userDAO.findByEmail(email);
     }
 
@@ -38,12 +38,11 @@ public class UserService {
     }
 
     public User login(User credentials) {
-        String emaiId;
-        emaiId = credentials.getEmailId();
-        Optional<User> existing = getByEmail(emaiId);
-        if(existing.isPresent()) {
-            User user = existing.get();
-            boolean isValid = Cryptography.validatePassword(user.getPassword(), credentials.getPassword());
+        String emailId;
+        emailId = credentials.getEmailId();
+        User user = getByEmail(emailId);
+        if(!Objects.equal(user, null)) {
+            boolean isValid = Cryptography.validatePassword(credentials.getPassword(), user.getPassword());
             if(isValid) {
                 return user;
             } else {
@@ -63,5 +62,9 @@ public class UserService {
         existing.merge(model);
         userDAO.update(existing);
         return id;
+    }
+
+    public void delete(Long id) {
+        userDAO.delete(id);
     }
 }
