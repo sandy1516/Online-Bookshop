@@ -2,16 +2,26 @@ package com.san.pro.BookStore.model;
 
 import com.google.common.base.Objects;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * Created by Administrator on 21-10-2015.
  */
 public class Book extends Model {
+
+    @NotNull
     private String isbn;
+    @NotNull
     private String bookName;
+    @NotNull
     private String author;
+    @NotNull
     private String publication;
+    @NotNull
     private String edition;
+    @NotNull
     private Float cost;
+    @NotNull
     private Long selectedNumberOfBook;
 
     public String getIsbn() {

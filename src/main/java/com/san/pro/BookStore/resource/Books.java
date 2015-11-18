@@ -2,6 +2,7 @@ package com.san.pro.BookStore.resource;
 
 import com.san.pro.BookStore.model.Book;
 import com.san.pro.BookStore.service.BookService;
+import io.dropwizard.validation.Validated;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -22,6 +23,14 @@ public class Books {
     @Inject
     public Books(BookService bookService) {
         this.bookService = bookService;
+    }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response create(@Validated Book book) {
+        bookService.create(book);
+        return Response.status(Response.Status.CREATED).entity(book).build();
     }
 
     @GET
