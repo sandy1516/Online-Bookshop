@@ -1,15 +1,26 @@
 package com.san.pro.BookStore.model;
 
+import com.google.common.base.Objects;
+
 /**
  * Created by Administrator on 21-10-2015.
  */
 public class Book extends Model {
+    private String isbn;
     private String bookName;
     private String author;
     private String publication;
     private String edition;
-    private String cost;
-    private String selectedNumberOfBook;
+    private Float cost;
+    private Long selectedNumberOfBook;
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
 
     public String getBookName() {
         return bookName;
@@ -43,19 +54,45 @@ public class Book extends Model {
         this.edition = edition;
     }
 
-    public String getCost() {
+    public Float getCost() {
         return cost;
     }
 
-    public void setCost(String cost) {
+    public void setCost(Float cost) {
         this.cost = cost;
     }
 
-    public String getSelectedNumberOfBook() {
+    public Long getSelectedNumberOfBook() {
         return selectedNumberOfBook;
     }
 
-    public void setSelectedNumberOfBook(String selectedNumberOfBook) {
+    public void setSelectedNumberOfBook(Long selectedNumberOfBook) {
         this.selectedNumberOfBook = selectedNumberOfBook;
+    }
+
+    public void merge(Book book) {
+
+        if(!Objects.equal(null, book.getIsbn())) {
+            this.setIsbn(book.getIsbn());
+        }
+        if(!Objects.equal(null, book.getBookName())) {
+            this.setBookName(book.getBookName());
+        }
+        if(!Objects.equal(null, book.getAuthor())) {
+            this.setAuthor(book.getAuthor());
+        }
+        if(!Objects.equal(null, book.getPublication())) {
+            this.setPublication(book.getPublication());
+        }
+        if(!Objects.equal(null, book.getEdition())) {
+            this.setEdition(book.getEdition());
+        }
+        if(!Objects.equal(null, book.getCost())) {
+            this.setCost(book.getCost());
+        }
+        if(!Objects.equal(null, book.getSelectedNumberOfBook())) {
+            this.setSelectedNumberOfBook(book.getSelectedNumberOfBook());
+        }
+
     }
 }

@@ -60,17 +60,6 @@ public class UserDAO implements UserSQL {
     }
 
     @Override
-    public User findByEmail(final String emailId) {
-        return getDBI().inTransaction(new TransactionCallback<User>() {
-            @Override
-            public User inTransaction(Handle handle, TransactionStatus transactionStatus) throws Exception {
-                UserSQL daoModel = handle.attach(UserSQL.class);
-                return daoModel.findByEmail(emailId);
-            }
-        });
-    }
-
-    @Override
     public List<User> findAll() {
         return getDBI().inTransaction(new TransactionCallback<List<User>>() {
             @Override
@@ -90,6 +79,17 @@ public class UserDAO implements UserSQL {
                 UserSQL daoModel = handle.attach(UserSQL.class);
                 daoModel.delete(id);
                 return null;
+            }
+        });
+    }
+
+    @Override
+    public User findByEmail(final String emailId) {
+        return getDBI().inTransaction(new TransactionCallback<User>() {
+            @Override
+            public User inTransaction(Handle handle, TransactionStatus transactionStatus) throws Exception {
+                UserSQL daoModel = handle.attach(UserSQL.class);
+                return daoModel.findByEmail(emailId);
             }
         });
     }
