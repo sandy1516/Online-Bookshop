@@ -51,8 +51,8 @@ public class Books {
     @PUT
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response update(@PathParam("id") Long id, Book book) {
-        bookService.update(id, book);
+    public Response update(@PathParam("id") Long id, Book model) {
+        Book book = bookService.update(id, model);
         return Response.status(Response.Status.OK).entity(book).build();
     }
 

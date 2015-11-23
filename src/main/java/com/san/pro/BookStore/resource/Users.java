@@ -61,8 +61,8 @@ public class Users {
     @PUT
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response update(@PathParam("id") Long id, User user) {
-        userService.update(id, user);
+    public Response update(@PathParam("id") Long id, User model) {
+        User user = userService.update(id, model);
         return Response.status(Response.Status.OK).entity(user).build();
     }
 

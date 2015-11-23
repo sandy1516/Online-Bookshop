@@ -32,11 +32,11 @@ public class BookService {
         return bookDAO.findAll();
     }
 
-    public long update(Long id, Book model) {
-        Book existing = bookDAO.read(id);
-        existing.merge(model);
-        bookDAO.update(existing);
-        return id;
+    public Book update(Long id, Book model) {
+        Book book = bookDAO.read(id);
+        book.merge(model);
+        bookDAO.update(book);
+        return book;
     }
 
     public void delete(Long id) {

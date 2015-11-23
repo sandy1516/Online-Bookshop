@@ -57,11 +57,11 @@ public class UserService {
         return userDAO.findAll();
     }
 
-    public long update(Long id, User model) {
-        User existing = userDAO.read(id);
-        existing.merge(model);
-        userDAO.update(existing);
-        return id;
+    public User update(Long id, User model) {
+        User user = userDAO.read(id);
+        user.merge(model);
+        userDAO.update(user);
+        return user;
     }
 
     public void delete(Long id) {

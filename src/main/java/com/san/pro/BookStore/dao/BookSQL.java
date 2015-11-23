@@ -1,6 +1,6 @@
 package com.san.pro.BookStore.dao;
 
-import com.san.pro.BookStore.mapper.UserMapper;
+import com.san.pro.BookStore.mapper.BookMapper;
 import com.san.pro.BookStore.model.Book;
 import org.skife.jdbi.v2.sqlobject.*;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by sandeepkumar.s on 11/18/2015.
  */
-@RegisterMapper(UserMapper.class)
+@RegisterMapper(BookMapper.class)
 public interface BookSQL {
 
     @SqlUpdate("INSERT into books (isbn, book_name, author, publication, edition, cost, selected_no_of_book, created_at, created_by, updated_at, updated_by) values (:isbn, :bookName, :author, :publication, :edition, :cost, :selectedNumberOfBook, :createdAt, :createdBy, :updatedAt, :updatedBy)")
