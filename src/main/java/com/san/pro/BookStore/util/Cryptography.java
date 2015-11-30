@@ -1,11 +1,13 @@
 package com.san.pro.BookStore.util;
 
+import com.auth0.jwt.JWTSigner;
 import org.mindrot.jbcrypt.BCrypt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.util.Map;
 
 /**
  * Created by sandeepkumar.s on 11/11/2015.
@@ -42,5 +44,10 @@ public class Cryptography {
 
     public static boolean validatePassword(String password, String hash) {
         return BCrypt.checkpw(password, hash);
+    }
+
+    public static String signJwt(Map<String, Object> claims, String secret) {
+        JWTSigner signer = new JWTSigner(secret);
+        return signer.sign(claims);
     }
 }

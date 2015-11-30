@@ -39,8 +39,7 @@ public class Users {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response login(User model) {
-       User user = userService.login(model);
-        return Response.status(Response.Status.OK).entity(user).build();
+        return Response.status(Response.Status.OK).entity(userService.login(model)).build();
     }
 
     @GET
