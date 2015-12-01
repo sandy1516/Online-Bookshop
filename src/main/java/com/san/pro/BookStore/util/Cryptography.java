@@ -48,6 +48,8 @@ public class Cryptography {
 
     public static String signJwt(Map<String, Object> claims, String secret) {
         JWTSigner signer = new JWTSigner(secret);
+//        System.out.println("hello");
+//        System.out.println(signer.sign(claims));
         return signer.sign(claims);
     }
 }

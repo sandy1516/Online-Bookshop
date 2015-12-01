@@ -1,9 +1,9 @@
+api:
+  jwtAudience: audience
+  jwtSecret: powerofrock
 tokenExpirationInMillis: 1800000
 database:
   driverClass: com.mysql.jdbc.Driver
   user: root
   password: india@123
   url: jdbc:mysql://localhost:3306/test
-api:
-  jwtAudience: audience
-  jwtSecret: powerofrock

@@ -10,6 +10,7 @@ import com.san.pro.BookStore.model.User;
 import com.san.pro.BookStore.util.Cryptography;
 import org.joda.time.Instant;
 
+import javax.inject.Named;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +26,7 @@ public class UserService {
     private ApiConfiguration apiConfiguration;
 
     @Inject
-    public UserService(UserDAO userDAO, Configuration configuration, ApiConfiguration apiConfiguration) {
+    public UserService(UserDAO userDAO, Configuration configuration, @Named (ApiConfiguration.NAMED_BINDING) ApiConfiguration apiConfiguration) {
         this.userDAO = userDAO;
         this.configuration = configuration;
         this.apiConfiguration = apiConfiguration;
@@ -58,6 +59,8 @@ public class UserService {
                 claims.put(Constants.USER_ID_IDENTIFIER, user.getId());
                 long expiry = new Instant().getMillis() + configuration.getTokenExpirationInMillis();
                 claims.put(Constants.TOKEN_EXPIRATION_IDENTIFIER, expiry);
+                System.out.println("this is claim"+claims);
+                System.out.println("this is secret"+apiConfiguration.getJwtSecret());
                 return Cryptography.signJwt(claims, apiConfiguration.getJwtSecret());
             } else {
                 throw new IllegalArgumentException("Password is invalid");

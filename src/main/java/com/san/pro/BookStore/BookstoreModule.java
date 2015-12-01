@@ -2,7 +2,10 @@ package com.san.pro.BookStore;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
+import com.san.pro.BookStore.config.ApiConfiguration;
 import org.skife.jdbi.v2.DBI;
+
+import javax.inject.Named;
 
 
 /**
@@ -19,6 +22,12 @@ public class BookstoreModule extends AbstractModule {
 
     public static void setDbi(DBI dbi) {
         BookstoreModule.dbi = dbi;
+    }
+
+    @Provides
+    @Named(ApiConfiguration.NAMED_BINDING)
+    public ApiConfiguration getApiConfiguration(Configuration configuration) {
+        return configuration.getApiConfiguration();
     }
 
     @Override

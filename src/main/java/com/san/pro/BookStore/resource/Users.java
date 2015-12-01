@@ -37,9 +37,10 @@ public class Users {
     @Path("/login")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
     public Response login(User model) {
-        return Response.status(Response.Status.OK).entity(userService.login(model)).build();
+        String authToken = userService.login(model);
+        return Response.status(Response.Status.OK).entity(authToken).build();
     }
 
     @GET

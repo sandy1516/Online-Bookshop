@@ -3,9 +3,12 @@ package com.san.pro.BookStore.config;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.validator.constraints.NotBlank;
 
+import javax.inject.Singleton;
+
 /**
  * Created by sandeepkumar.s on 11/30/2015.
  */
+@Singleton
 public class ApiConfiguration {
 
     public static final String NAMED_BINDING = "com.san.pro.BookStore.config";
