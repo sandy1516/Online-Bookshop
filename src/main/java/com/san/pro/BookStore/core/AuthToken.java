@@ -8,7 +8,7 @@ public class AuthToken {
     public AuthToken(Long userId) {
         this.userId = userId;
     }
-    public Long getAuthToken() {
+    public Long getUserId() {
         return userId;
     }
 }

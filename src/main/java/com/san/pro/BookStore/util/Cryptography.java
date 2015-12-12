@@ -1,12 +1,17 @@
 package com.san.pro.BookStore.util;
 
 import com.auth0.jwt.JWTSigner;
+import com.auth0.jwt.JWTVerifier;
+import com.auth0.jwt.JWTVerifyException;
 import org.mindrot.jbcrypt.BCrypt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
+import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.security.SignatureException;
 import java.util.Map;
 
 /**
@@ -48,8 +53,14 @@ public class Cryptography {
 
     public static String signJwt(Map<String, Object> claims, String secret) {
         JWTSigner signer = new JWTSigner(secret);
-//        System.out.println("hello");
-//        System.out.println(signer.sign(claims));
         return signer.sign(claims);
+    }
+
+    public static Map<String, Object> unsignedJwt(String token ,String secret, String audience) throws SignatureException, NoSuchAlgorithmException, JWTVerifyException, InvalidKeyException, IOException {
+        try {
+            return new JWTVerifier(secret, audience).verify(token);
+        } catch(SignatureException e) {
+            throw new SignatureException("User is Unauthorized");
+        }
     }
 }

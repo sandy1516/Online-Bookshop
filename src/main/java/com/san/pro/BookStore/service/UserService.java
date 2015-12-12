@@ -59,8 +59,8 @@ public class UserService {
                 claims.put(Constants.USER_ID_IDENTIFIER, user.getId());
                 long expiry = new Instant().getMillis() + configuration.getTokenExpirationInMillis();
                 claims.put(Constants.TOKEN_EXPIRATION_IDENTIFIER, expiry);
-                System.out.println("this is claim"+claims);
-                System.out.println("this is secret"+apiConfiguration.getJwtSecret());
+                System.out.println(" this is claim "+claims);
+                System.out.println(" this is secret "+apiConfiguration.getJwtSecret());
                 return Cryptography.signJwt(claims, apiConfiguration.getJwtSecret());
             } else {
                 throw new IllegalArgumentException("Password is invalid");
