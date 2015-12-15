@@ -1,6 +1,8 @@
 package com.san.pro.BookStore.resource;
 
 import com.google.inject.Inject;
+import com.san.pro.BookStore.annotations.AuthParam;
+import com.san.pro.BookStore.core.AuthToken;
 import com.san.pro.BookStore.model.User;
 import com.san.pro.BookStore.service.UserService;
 import io.dropwizard.validation.Validated;
@@ -46,14 +48,14 @@ public class Users {
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response get(@PathParam("id") Long id) {
+    public Response get(@PathParam("id") Long id, @AuthParam AuthToken authToken) {
         User user = this.userService.getById(id);
         return Response.status(Response.Status.OK).entity(user).build();
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAll() {
+    public Response getAll(@AuthParam AuthToken authToken) {
         List<User> user = userService.getAll();
         return Response.status(Response.Status.OK).entity(user).build();
     }
@@ -61,14 +63,14 @@ public class Users {
     @PUT
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response update(@PathParam("id") Long id, User model) {
+    public Response update(@PathParam("id") Long id, User model, @AuthParam AuthToken authToken) {
         User user = userService.update(id, model);
         return Response.status(Response.Status.OK).entity(user).build();
     }
 
     @DELETE
     @Path("{id}")
-    public Response delete(@PathParam("id") Long id) {
+    public Response delete(@PathParam("id") Long id, @AuthParam AuthToken authToken) {
         userService.delete(id);
         return Response.status(Response.Status.NO_CONTENT).build();
     }

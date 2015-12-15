@@ -6,11 +6,14 @@ import com.san.pro.BookStore.Configuration;
 import com.san.pro.BookStore.config.ApiConfiguration;
 import com.san.pro.BookStore.core.Constants;
 import com.san.pro.BookStore.dao.UserDAO;
+import com.san.pro.BookStore.exceptions.ApiException;
+import com.san.pro.BookStore.exceptions.ErrorCodes;
 import com.san.pro.BookStore.model.User;
 import com.san.pro.BookStore.util.Cryptography;
 import org.joda.time.Instant;
 
 import javax.inject.Named;
+import javax.ws.rs.core.Response;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,15 +35,20 @@ public class UserService {
         this.apiConfiguration = apiConfiguration;
     }
 
-    public User getById(long id) {
-        return userDAO.read(id);
+    public User getById(long id) throws ApiException {
+        User user =userDAO.read(id);
+        if(!Objects.equal(null, user)) {
+            return user;
+        } else {
+            throw new ApiException(new NoSuchElementException(" User not found with the given id "), Response.Status.NOT_FOUND).addError(ErrorCodes.RESOURCE_NOT_FOUND);
+        }
     }
 
-    public User getByEmail(String email) {
+    public User getByEmail(String email) throws ApiException {
         return userDAO.findByEmail(email);
     }
 
-    public Long create(User user) {
+    public Long create(User user) throws ApiException {
         user.setPassword(Cryptography.encryptPassword(user.getPassword()));
         Long id = userDAO.create(user);
         user.setId(id);
@@ -48,7 +56,7 @@ public class UserService {
         return id;
     }
 
-    public String login(User credentials) {
+    public String login(User credentials) throws ApiException {
         String emailId;
         emailId = credentials.getEmailId();
         User user = getByEmail(emailId);
@@ -63,25 +71,25 @@ public class UserService {
                 System.out.println(" this is secret "+apiConfiguration.getJwtSecret());
                 return Cryptography.signJwt(claims, apiConfiguration.getJwtSecret());
             } else {
-                throw new IllegalArgumentException("Password is invalid");
+                throw new ApiException(new IllegalArgumentException(" Password is invalid "), Response.Status.UNAUTHORIZED).addError(ErrorCodes.INVALID_PASSWORD);
             }
         } else {
-            throw new NoSuchElementException("User not found with the given emailId");
+            throw new ApiException(new NoSuchElementException(" User not found with the given emailId "), Response.Status.NOT_FOUND).addError(ErrorCodes.RESOURCE_NOT_FOUND);
         }
     }
 
-    public List<User> getAll() {
+    public List<User> getAll() throws ApiException {
         return userDAO.findAll();
     }
 
-    public User update(Long id, User model) {
+    public User update(Long id, User model) throws ApiException {
         User user = userDAO.read(id);
         user.merge(model);
         userDAO.update(user);
         return user;
     }
 
-    public void delete(Long id) {
+    public void delete(Long id) throws ApiException {
         userDAO.delete(id);
     }
 }

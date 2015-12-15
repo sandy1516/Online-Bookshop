@@ -3,10 +3,13 @@ package com.san.pro.BookStore.util;
 import com.auth0.jwt.JWTSigner;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.JWTVerifyException;
+import com.san.pro.BookStore.exceptions.ApiException;
+import com.san.pro.BookStore.exceptions.ErrorCodes;
 import org.mindrot.jbcrypt.BCrypt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -34,9 +37,9 @@ public class Cryptography {
 
     }
 
-    public static String encryptPassword(String password) throws IllegalArgumentException{
+    public static String encryptPassword(String password) throws ApiException {
         if(password == null || password.trim().length()<1) {
-            throw new IllegalArgumentException("password is invalid");
+            throw new ApiException(new IllegalArgumentException("password is invalid"), Response.Status.UNAUTHORIZED).addError(ErrorCodes.INVALID_PASSWORD);
         }
         String hashend = null;
         try {
@@ -56,11 +59,14 @@ public class Cryptography {
         return signer.sign(claims);
     }
 
-    public static Map<String, Object> unsignedJwt(String token ,String secret, String audience) throws SignatureException, NoSuchAlgorithmException, JWTVerifyException, InvalidKeyException, IOException {
+    public static Map<String, Object> unsignedJwt(String token ,String secret, String audience) throws ApiException {
         try {
             return new JWTVerifier(secret, audience).verify(token);
         } catch(SignatureException e) {
-            throw new SignatureException("User is Unauthorized");
+            throw new ApiException(new SignatureException(" User is Unauthorized "), Response.Status.UNAUTHORIZED).addError(ErrorCodes.UNAUTHORIZED);
+        } catch(NoSuchAlgorithmException | JWTVerifyException | InvalidKeyException | IOException ex) {
+            throw new ApiException(ex, Response.Status.UNAUTHORIZED).addError(ErrorCodes.INVALID_AUTHORIZATION_TOKEN);
         }
     }
 }
+
