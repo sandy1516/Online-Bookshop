@@ -21,8 +21,6 @@ public class Book extends Model {
     private String edition;
     @NotNull
     private Float cost;
-    @NotNull
-    private Long selectedNumberOfBook;
 
     public String getIsbn() {
         return isbn;
@@ -72,14 +70,6 @@ public class Book extends Model {
         this.cost = cost;
     }
 
-    public Long getSelectedNumberOfBook() {
-        return selectedNumberOfBook;
-    }
-
-    public void setSelectedNumberOfBook(Long selectedNumberOfBook) {
-        this.selectedNumberOfBook = selectedNumberOfBook;
-    }
-
     public void merge(Book book) {
 
         if(!Objects.equal(null, book.getIsbn())) {
@@ -100,9 +90,5 @@ public class Book extends Model {
         if(!Objects.equal(null, book.getCost())) {
             this.setCost(book.getCost());
         }
-        if(!Objects.equal(null, book.getSelectedNumberOfBook())) {
-            this.setSelectedNumberOfBook(book.getSelectedNumberOfBook());
-        }
-
     }
 }

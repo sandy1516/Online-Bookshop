@@ -20,6 +20,7 @@ public class Order extends Model{
     private String orderDate;
     private List orderItemList;
     private OrderStatus orderStatus;
+    private Long selectedNumberOfBook;
 
     public String getAddress() {
         return address;
@@ -123,5 +124,13 @@ public class Order extends Model{
 
     public void setOrderStatus(OrderStatus orderStatus) {
         this.orderStatus = orderStatus;
+    }
+
+    public Long getSelectedNumberOfBook() {
+        return selectedNumberOfBook;
+    }
+
+    public void setSelectedNumberOfBook(Long selectedNumberOfBook) {
+        this.selectedNumberOfBook = selectedNumberOfBook;
     }
 }
