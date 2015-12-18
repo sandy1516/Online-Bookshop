@@ -45,7 +45,12 @@ public class UserService {
     }
 
     public User getByEmail(String email) throws ApiException {
-        return userDAO.findByEmail(email);
+        User user = userDAO.findByEmail(email);
+        if(Objects.equal(null, user)) {
+            return user;
+        } else {
+            throw new ApiException(new NoSuchElementException(" User not found with the given email id "), Response.Status.NOT_FOUND).addError(ErrorCodes.RESOURCE_NOT_FOUND);
+        }
     }
 
     public Long create(User user) throws ApiException {
@@ -79,14 +84,23 @@ public class UserService {
     }
 
     public List<User> getAll() throws ApiException {
-        return userDAO.findAll();
+        List<User> userList = userDAO.findAll();
+        if(!Objects.equal(null, userList)) {
+            return userList;
+        } else {
+            throw new ApiException(new NoSuchElementException(" No User found !!!"), Response.Status.NOT_FOUND).addError(ErrorCodes.RESOURCE_NOT_FOUND);
+        }
     }
 
     public User update(Long id, User model) throws ApiException {
         User user = userDAO.read(id);
-        user.merge(model);
-        userDAO.update(user);
-        return user;
+        if(!Objects.equal(null, user)) {
+            user.merge(model);
+            userDAO.update(user);
+            return user;
+        } else {
+            throw new ApiException(new NoSuchElementException(" User not found with the given id "), Response.Status.NOT_FOUND).addError(ErrorCodes.RESOURCE_NOT_FOUND);
+        }
     }
 
     public void delete(Long id) throws ApiException {

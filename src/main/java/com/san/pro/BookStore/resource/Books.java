@@ -48,6 +48,14 @@ public class Books {
         return Response.status(Response.Status.OK).entity(book).build();
     }
 
+    @GET
+    @Path("isbn/{isbn}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getByISBN(@PathParam("isbn") String isbn) {
+        Book book = bookService.getByISBN(isbn);
+        return Response.status(Response.Status.OK).entity(book).build();
+    }
+
     @PUT
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
