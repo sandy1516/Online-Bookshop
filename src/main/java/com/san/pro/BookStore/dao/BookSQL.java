@@ -13,11 +13,11 @@ import java.util.List;
 @RegisterMapper(BookMapper.class)
 public interface BookSQL {
 
-    @SqlUpdate("INSERT into books (isbn, book_name, author, publication, edition, cost, selected_no_of_book, created_at, created_by, updated_at, updated_by) values (:isbn, :bookName, :author, :publication, :edition, :cost, :selectedNumberOfBook, :createdAt, :createdBy, :updatedAt, :updatedBy)")
+    @SqlUpdate("INSERT into books (isbn, book_name, author, publication, edition, cost, selected_no_of_books, created_at, created_by, updated_at, updated_by) values (:isbn, :bookName, :author, :publication, :edition, :cost, :selectedNumberOfBooks, :createdAt, :createdBy, :updatedAt, :updatedBy)")
     @GetGeneratedKeys
     Long create(@BindBean Book book);
 
-    @SqlUpdate("UPDATE books set isbn = :isbn, book_name = :bookName, author = :author, publication = :publication, edition = :edition, cost = :cost, selected_no_of_book = :selectedNumberOfBook, created_at = :createdAt, created_by = :createdBy, updated_at = :updatedAt, updated_by = :updatedBy WHERE id = :id")
+    @SqlUpdate("UPDATE books set isbn = :isbn, book_name = :bookName, author = :author, publication = :publication, edition = :edition, cost = :cost, selected_no_of_books = :selectedNumberOfBooks, created_at = :createdAt, created_by = :createdBy, updated_at = :updatedAt, updated_by = :updatedBy WHERE id = :id")
     long update(@BindBean Book book);
 
     @SqlQuery("SELECT * from books where id = :id")
