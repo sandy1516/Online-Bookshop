@@ -23,6 +23,12 @@ public class BookService {
         this.bookDAO = bookDAO;
     }
 
+    public Long create(Book book) {
+        Long id = bookDAO.create(book);
+        book.setId(id);
+        return id;
+    }
+
     public Book getById(long id) {
         Book book = bookDAO.read(id);
         if(!Objects.equals(null, book)) {
@@ -30,12 +36,6 @@ public class BookService {
         } else {
             throw new ApiException(new NoSuchElementException(" Book not found with the given id "), Response.Status.NOT_FOUND).addError(ErrorCodes.RESOURCE_NOT_FOUND);
         }
-    }
-
-    public Long create(Book book) {
-        Long id = bookDAO.create(book);
-        book.setId(id);
-        return id;
     }
 
     public List<Book> getAll() {

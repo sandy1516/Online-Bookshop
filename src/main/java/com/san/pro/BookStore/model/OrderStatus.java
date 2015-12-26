@@ -25,4 +25,15 @@ public enum OrderStatus {
     public void setStatus(String orderStatus) {
         this.orderStatus = orderStatus;
     }
+
+    public static OrderStatus fromString(String status) {
+        if(status != null) {
+            for(OrderStatus orderStatus: OrderStatus.values()) {
+                if(orderStatus.equals(orderStatus.getOrderStatus())) {
+                    return orderStatus;
+                }
+            }
+        }
+        return null;
+    }
 }

@@ -1,26 +1,41 @@
 package com.san.pro.BookStore.model;
 
-import java.util.List;
+import com.google.common.base.Objects;
+
+import javax.validation.constraints.NotNull;
 
 /**
  * Created by Administrator on 21-10-2015.
  */
 public class Order extends Model{
 
+    @NotNull
     private String address;
+    @NotNull
     private String street;
+    @NotNull
     private String city;
+    @NotNull
     private String state;
+    @NotNull
     private String country;
+    @NotNull
     private String zip;
+    @NotNull
+    private int selectedNumberOfBooks;
+    @NotNull
     private String cardNo;
-    private String expDate;
+    @NotNull
+    private String cardExpiry;
+    @NotNull
     private float totalAmount;
-    private int totalItem;
+    @NotNull
     private String orderDate;
-    private List orderItemList;
-    private OrderStatus orderStatus;
 
+//    private List<Long> orderItemList;
+
+    @NotNull
+    private OrderStatus orderStatus;
 
     public String getAddress() {
         return address;
@@ -70,6 +85,14 @@ public class Order extends Model{
         this.zip = zip;
     }
 
+    public int getSelectedNumberOfBooks() {
+        return selectedNumberOfBooks;
+    }
+
+    public void setSelectedNumberOfBooks(int selectedNumberOfBooks) {
+        this.selectedNumberOfBooks = selectedNumberOfBooks;
+    }
+
     public String getCardNo() {
         return cardNo;
     }
@@ -78,12 +101,12 @@ public class Order extends Model{
         this.cardNo = cardNo;
     }
 
-    public String getExpDate() {
-        return expDate;
+    public String getCardExpiry() {
+        return cardExpiry;
     }
 
-    public void setExpDate(String expDate) {
-        this.expDate = expDate;
+    public void setCardExpiry(String cardExpiry) {
+        this.cardExpiry = cardExpiry;
     }
 
     public float getTotalAmount() {
@@ -94,14 +117,6 @@ public class Order extends Model{
         this.totalAmount = totalAmount;
     }
 
-    public int getTotalItem() {
-        return totalItem;
-    }
-
-    public void setTotalItem(int totalItem) {
-        this.totalItem = totalItem;
-    }
-
     public String getOrderDate() {
         return orderDate;
     }
@@ -110,13 +125,13 @@ public class Order extends Model{
         this.orderDate = orderDate;
     }
 
-    public List getOrderItemList() {
-        return orderItemList;
-    }
+//    public List<Long> getOrderItemList() {
+//        return orderItemList;
+//    }
 
-    public void setOrderItemList(List orderItemList) {
-        this.orderItemList = orderItemList;
-    }
+//    public void setOrderItemList(List<Long> orderItemList) {
+//        this.orderItemList = orderItemList;
+//    }
 
     public OrderStatus getOrderStatus() {
         return orderStatus;
@@ -126,5 +141,45 @@ public class Order extends Model{
         this.orderStatus = orderStatus;
     }
 
-
+    public void merge(Order order) {
+        if(!Objects.equal(null, order.getAddress())) {
+            this.setAddress(order.getAddress());
+        }
+        if(!Objects.equal(null, order.getStreet())) {
+            this.setStreet(order.getStreet());
+        }
+        if(!Objects.equal(null, order.getCity())) {
+            this.setCity(order.getCity());
+        }
+        if(!Objects.equal(null, order.getState())) {
+            this.setState(order.getState());
+        }
+        if(!Objects.equal(null, order.getCountry())) {
+            this.setCountry(order.getCountry());
+        }
+        if(!Objects.equal(null, order.getZip())) {
+            this.setZip(order.getZip());
+        }
+        if(!Objects.equal(null, order.getSelectedNumberOfBooks())) {
+            this.setSelectedNumberOfBooks(order.getSelectedNumberOfBooks());
+        }
+        if(!Objects.equal(null, order.getCardNo())) {
+            this.setCardNo(order.getCardNo());
+        }
+        if(!Objects.equal(null, order.getCardExpiry())) {
+            this.setCardExpiry(order.getCardExpiry());
+        }
+        if(!Objects.equal(null, order.getTotalAmount())) {
+            this.setTotalAmount(order.getTotalAmount());
+        }
+        if(!Objects.equal(null, order.getOrderDate())) {
+            this.setOrderDate(order.getOrderDate());
+        }
+//        if(!Objects.equal(null, order.getOrderItemList())) {
+//            this.setOrderItemList(order.getOrderItemList());
+//        }
+        if(!Objects.equal(null, order.getOrderStatus())) {
+            this.setOrderStatus(order.getOrderStatus());
+        }
+    }
 }

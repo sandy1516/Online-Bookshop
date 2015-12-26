@@ -20,7 +20,6 @@ public class BookMapper implements ResultSetMapper<Book> {
         book.setPublication(resultSet.getString("publication"));
         book.setEdition(resultSet.getString("edition"));
         book.setCost(resultSet.getFloat("cost"));
-        book.setSelectedNumberOfBooks(resultSet.getLong("selected_no_of_books"));
         book.setCreatedAt(resolveLong(resultSet, "created_at"));
         book.setCreatedBy(resolveLong(resultSet, "created_by"));
         book.setUpdatedAt(resolveLong(resultSet, "updated_at"));
