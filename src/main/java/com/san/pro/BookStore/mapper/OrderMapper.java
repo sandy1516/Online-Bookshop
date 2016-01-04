@@ -24,12 +24,12 @@ public class OrderMapper implements ResultSetMapper<Order> {
         order.setState(resultSet.getString("state"));
         order.setCountry(resultSet.getString("country"));
         order.setZip(resultSet.getString("zip"));
-        order.setSelectedNumberOfBooks(resultSet.getInt("selected_no_of_books"));
+        order.setSelectedNumberOfBooks(resultSet.getInt("selected_number_Of_books"));
         order.setCardNo(resultSet.getString("card_no"));
         order.setCardExpiry(resultSet.getString("card_expiry"));
         order.setTotalAmount(resultSet.getFloat("total_amount"));
         order.setOrderDate(resultSet.getString("order_date"));
-//        order.setOrderItemList(resolveLong(resultSet, "order_item_list"));
+        order.setOrderItemList(resultSet.getString("order_item_list"));
         order.setOrderStatus(getOrderStatusFromString(resultSet.getString("order_status")));
         order.setCreatedAt(resolveLong(resultSet, "created_at"));
         order.setCreatedBy(resolveLong(resultSet, "created_by"));

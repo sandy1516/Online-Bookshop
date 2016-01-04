@@ -22,18 +22,15 @@ public class Order extends Model{
     @NotNull
     private String zip;
     @NotNull
-    private int selectedNumberOfBooks;
-    @NotNull
     private String cardNo;
     @NotNull
     private String cardExpiry;
-    @NotNull
+    private int selectedNumberOfBooks;
     private float totalAmount;
     @NotNull
     private String orderDate;
-
-//    private List<Long> orderItemList;
-
+    @NotNull
+    private String orderItemList;
     @NotNull
     private OrderStatus orderStatus;
 
@@ -125,13 +122,13 @@ public class Order extends Model{
         this.orderDate = orderDate;
     }
 
-//    public List<Long> getOrderItemList() {
-//        return orderItemList;
-//    }
+    public String getOrderItemList() {
+        return orderItemList;
+    }
 
-//    public void setOrderItemList(List<Long> orderItemList) {
-//        this.orderItemList = orderItemList;
-//    }
+    public void setOrderItemList(String orderItemList) {
+        this.orderItemList = orderItemList;
+    }
 
     public OrderStatus getOrderStatus() {
         return orderStatus;
@@ -175,9 +172,9 @@ public class Order extends Model{
         if(!Objects.equal(null, order.getOrderDate())) {
             this.setOrderDate(order.getOrderDate());
         }
-//        if(!Objects.equal(null, order.getOrderItemList())) {
-//            this.setOrderItemList(order.getOrderItemList());
-//        }
+        if(!Objects.equal(null, order.getOrderItemList())) {
+            this.setOrderItemList(order.getOrderItemList());
+        }
         if(!Objects.equal(null, order.getOrderStatus())) {
             this.setOrderStatus(order.getOrderStatus());
         }

@@ -12,11 +12,11 @@ import java.util.List;
  */
 @RegisterMapper(OrderMapper.class)
 public interface OrderSQL {
-    @SqlUpdate("INSERT into orders (address, street, city, state, country, zip, card_no, card_expiry, total_amount, order_date, order_status, selected_number_Of_books, created_at, created_by, updated_at, updated_by) values (:address, :street, :city, :state, :country, :zip, :cardNo, :cardExpiry, :totalAmount, :orderDate, :orderStatus, :selectedNumberOfBooks, :createdAt, :createdBy, :updatedAt, :updatedBy)")
+    @SqlUpdate("INSERT into orders (address, street, city, state, country, zip, card_no, card_expiry, total_amount, order_date, order_status, selected_number_Of_books, order_item_list, created_at, created_by, updated_at, updated_by) values (:address, :street, :city, :state, :country, :zip, :cardNo, :cardExpiry, :totalAmount, :orderDate, :orderStatus, :selectedNumberOfBooks, :orderItemList, :createdAt, :createdBy, :updatedAt, :updatedBy)")
     @GetGeneratedKeys
     Long create(@BindBean Order order);
 
-    @SqlUpdate("UPDATE orders set address=:address, street=:street, city=:city, state=:state, country=:country, zip=:zip, card_no=:cardNo, card_expiry=:cardExpiry, total_amount=:totalAmount, order_date=:orderDate, order_status = :orderStatus, selected_number_Of_books =:selectedNumberOfBook, created_at = :createdAt, created_by = :createdBy, updated_at = :updatedAt, updated_by = :updatedBy WHERE id = :id")
+    @SqlUpdate("UPDATE orders set address=:address, street=:street, city=:city, state=:state, country=:country, zip=:zip, card_no=:cardNo, card_expiry=:cardExpiry, total_amount=:totalAmount, order_date=:orderDate, order_status = :orderStatus, selected_number_of_books =:selectedNumberOfBooks, order_item_list = :orderItemList, created_at = :createdAt, created_by = :createdBy, updated_at = :updatedAt, updated_by = :updatedBy WHERE id = :id")
     long update(@BindBean Order order);
 
     @SqlQuery("SELECT * from orders where id = :id")

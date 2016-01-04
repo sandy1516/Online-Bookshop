@@ -1,6 +1,7 @@
 package com.san.pro.BookStore.resource;
 
 import com.san.pro.BookStore.model.Order;
+import com.san.pro.BookStore.service.BookService;
 import com.san.pro.BookStore.service.OrderService;
 import io.dropwizard.validation.Validated;
 
@@ -19,10 +20,12 @@ import java.util.List;
 public class Orders {
 
     private OrderService orderService;
+    private BookService bookService;
 
     @Inject
-    public Orders(OrderService orderService) {
+    public Orders(OrderService orderService, BookService bookService) {
         this.orderService = orderService;
+        this.bookService = bookService;
     }
 
     @POST
