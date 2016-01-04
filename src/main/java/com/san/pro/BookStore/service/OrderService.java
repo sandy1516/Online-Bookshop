@@ -1,12 +1,15 @@
 package com.san.pro.BookStore.service;
 
 import com.google.inject.Inject;
+import com.san.pro.BookStore.dao.BookDAO;
 import com.san.pro.BookStore.dao.OrderDAO;
 import com.san.pro.BookStore.exceptions.ApiException;
 import com.san.pro.BookStore.exceptions.ErrorCodes;
+import com.san.pro.BookStore.model.Book;
 import com.san.pro.BookStore.model.Order;
 
 import javax.ws.rs.core.Response;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Objects;
@@ -17,10 +20,12 @@ import java.util.Objects;
 public class OrderService {
 
     private OrderDAO orderDAO;
+    private BookDAO bookDAO;
 
     @Inject
-    public OrderService(OrderDAO orderDAO) {
+    public OrderService(OrderDAO orderDAO, BookDAO bookDAO) {
         this.orderDAO = orderDAO;
+        this.bookDAO = bookDAO;
     }
 
     public Long create(Order order) {
@@ -31,10 +36,19 @@ public class OrderService {
 
     public Order getById(long id) {
         Order order = orderDAO.read(id);
-        if(!Objects.equals(null, order)) {
-            return order;
-        } else {
-            throw new ApiException(new NoSuchElementException(" Order not found with the given id "), Response.Status.NOT_FOUND).addError(ErrorCodes.RESOURCE_NOT_FOUND);
+        List<Book> bookList = new ArrayList<Book>();
+        try {
+            if (!Objects.equals(null, order)) {
+                for (String retval : order.getOrderItemList().split(",")) {
+                    bookList.add(bookDAO.read(Long.parseLong(retval)));
+                }
+                order.setOrderedBooksList(bookList);
+                return order;
+            } else {
+                throw new ApiException(new NoSuchElementException(" Order not found with the given id "), Response.Status.NOT_FOUND).addError(ErrorCodes.RESOURCE_NOT_FOUND);
+            }
+        } catch (NumberFormatException nfe) {
+            throw new ApiException(new NumberFormatException(" NumberFormatException: "), Response.Status.BAD_REQUEST).addError(ErrorCodes.INTERNAL_SERVER_ERROR);
         }
     }
 

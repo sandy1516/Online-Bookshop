@@ -16,7 +16,7 @@ public interface OrderSQL {
     @GetGeneratedKeys
     Long create(@BindBean Order order);
 
-    @SqlUpdate("UPDATE orders set address=:address, street=:street, city=:city, state=:state, country=:country, zip=:zip, card_no=:cardNo, card_expiry=:cardExpiry, total_amount=:totalAmount, order_date=:orderDate, order_status = :orderStatus, selected_number_of_books =:selectedNumberOfBooks, order_item_list = :orderItemList, created_at = :createdAt, created_by = :createdBy, updated_at = :updatedAt, updated_by = :updatedBy WHERE id = :id")
+    @SqlUpdate("UPDATE orders set address=:address, street=:street, city=:city, state=:state, country=:country, zip=:zip, card_no=:cardNo, card_expiry=:cardExpiry, total_amount=:totalAmount, order_date=:orderDate, order_status = :orderStatus, selected_number_Of_books =:selectedNumberOfBooks, order_item_list = :orderItemList, created_at = :createdAt, created_by = :createdBy, updated_at = :updatedAt, updated_by = :updatedBy WHERE id = :id")
     long update(@BindBean Order order);
 
     @SqlQuery("SELECT * from orders where id = :id")

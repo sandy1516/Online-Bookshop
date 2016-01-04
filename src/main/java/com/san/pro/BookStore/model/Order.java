@@ -3,6 +3,7 @@ package com.san.pro.BookStore.model;
 import com.google.common.base.Objects;
 
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 /**
  * Created by Administrator on 21-10-2015.
@@ -31,6 +32,8 @@ public class Order extends Model{
     private String orderDate;
     @NotNull
     private String orderItemList;
+
+    private List<Book> orderedBooksList;
     @NotNull
     private OrderStatus orderStatus;
 
@@ -136,6 +139,14 @@ public class Order extends Model{
 
     public void setOrderStatus(OrderStatus orderStatus) {
         this.orderStatus = orderStatus;
+    }
+
+    public void setOrderedBooksList(List<Book> orderedBooksList) {
+        this.orderedBooksList = orderedBooksList;
+    }
+
+    public List<Book> getOrderedBooksList() {
+        return orderedBooksList;
     }
 
     public void merge(Order order) {
