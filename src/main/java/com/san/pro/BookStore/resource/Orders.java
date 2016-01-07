@@ -1,5 +1,7 @@
 package com.san.pro.BookStore.resource;
 
+import com.san.pro.BookStore.annotations.AuthParam;
+import com.san.pro.BookStore.core.AuthToken;
 import com.san.pro.BookStore.model.Order;
 import com.san.pro.BookStore.service.BookService;
 import com.san.pro.BookStore.service.OrderService;
@@ -31,8 +33,9 @@ public class Orders {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response create(@Validated Order order) {
-        orderService.create(order);
+    public Response create(@Validated Order order, @AuthParam AuthToken authToken) {
+        orderService.create(order, authToken);
+        order.setUserId(authToken.getUserId());
         return Response.status(Response.Status.CREATED).entity(order).build();
     }
 

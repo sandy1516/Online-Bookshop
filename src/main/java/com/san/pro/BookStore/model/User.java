@@ -12,8 +12,6 @@ public class User extends Model {
     @NotNull
     private String firstName;
     @NotNull
-    private String middleName;
-    @NotNull
     private String lastName;
     @NotNull
     private String emailId;
@@ -32,14 +30,6 @@ public class User extends Model {
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
-    }
-
-    public String getMiddleName() {
-        return middleName;
-    }
-
-    public void setMiddleName(String middleName) {
-        this.middleName = middleName;
     }
 
     public String getLastName() {
@@ -93,9 +83,6 @@ public class User extends Model {
     public void merge(User user) {
         if(!Objects.equal(null, user.getFirstName())) {
             this.setFirstName(user.getFirstName());
-        }
-        if(!Objects.equal(null, user.getMiddleName())) {
-            this.setMiddleName(user.getMiddleName());
         }
         if(!Objects.equal(null, user.getLastName())) {
             this.setLastName(user.getLastName());

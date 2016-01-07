@@ -6,7 +6,7 @@ package com.san.pro.BookStore.model;
 public enum OrderStatus {
 
     confirmed("confirmed"),
-    process("process"),
+    processing("processing"),
     shipment("shipment"),
     reached("reached"),
     delivered("delivered"),

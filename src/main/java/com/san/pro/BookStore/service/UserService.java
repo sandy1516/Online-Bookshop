@@ -46,7 +46,7 @@ public class UserService {
 
     public User getByEmail(String email) throws ApiException {
         User user = userDAO.findByEmail(email);
-        if(Objects.equal(null, user)) {
+        if(!Objects.equal(null, user)) {
             return user;
         } else {
             throw new ApiException(new NoSuchElementException(" User not found with the given email id "), Response.Status.NOT_FOUND).addError(ErrorCodes.RESOURCE_NOT_FOUND);
@@ -62,7 +62,7 @@ public class UserService {
     }
 
     public String login(User credentials) throws ApiException {
-        String emailId;
+        String emailId = " ";
         emailId = credentials.getEmailId();
         User user = getByEmail(emailId);
         if(!Objects.equal(user, null)) {
@@ -72,8 +72,8 @@ public class UserService {
                 claims.put(Constants.USER_ID_IDENTIFIER, user.getId());
                 long expiry = new Instant().getMillis() + configuration.getTokenExpirationInMillis();
                 claims.put(Constants.TOKEN_EXPIRATION_IDENTIFIER, expiry);
-                System.out.println(" this is claim "+claims);
-                System.out.println(" this is secret "+apiConfiguration.getJwtSecret());
+//                System.out.println(" this is claim "+claims);
+//                System.out.println(" this is secret "+apiConfiguration.getJwtSecret());
                 return Cryptography.signJwt(claims, apiConfiguration.getJwtSecret());
             } else {
                 throw new ApiException(new IllegalArgumentException(" Password is invalid "), Response.Status.UNAUTHORIZED).addError(ErrorCodes.INVALID_PASSWORD);

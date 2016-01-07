@@ -15,9 +15,8 @@ public class OrderMapper implements ResultSetMapper<Order> {
     public Order map(int i, ResultSet resultSet, StatementContext statementContext) throws SQLException {
         Order order = new Order();
         order.setId(resolveLong(resultSet, "id"));
-
-
-
+        order.setUserId(resolveLong(resultSet, "user_id"));
+        order.setNumber(resultSet.getString("number"));
         order.setAddress(resultSet.getString("address"));
         order.setStreet(resultSet.getString("street"));
         order.setCity(resultSet.getString("city"));

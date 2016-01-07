@@ -1,18 +1,17 @@
 package com.san.pro.BookStore.service;
 
 import com.google.inject.Inject;
+import com.san.pro.BookStore.core.AuthToken;
 import com.san.pro.BookStore.dao.BookDAO;
 import com.san.pro.BookStore.dao.OrderDAO;
 import com.san.pro.BookStore.exceptions.ApiException;
 import com.san.pro.BookStore.exceptions.ErrorCodes;
 import com.san.pro.BookStore.model.Book;
 import com.san.pro.BookStore.model.Order;
+import com.san.pro.BookStore.model.OrderStatus;
 
 import javax.ws.rs.core.Response;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * Created by sandeepkumar.s on 12/24/2015.
@@ -28,7 +27,18 @@ public class OrderService {
         this.bookDAO = bookDAO;
     }
 
-    public Long create(Order order) {
+    public Long create(Order order, AuthToken authToken) {
+        Random random = new Random();
+        int orderNumber = random.nextInt(1000);
+        if(orderNumber <= 9) {
+            order.setNumber("ORD-000" + orderNumber);
+        } else if (orderNumber<= 99) {
+            order.setNumber("ORD-00" + orderNumber);
+        } else {
+            order.setNumber("ORD-0" + orderNumber);
+        }
+        order.setOrderStatus(OrderStatus.processing);
+        order.setUserId(authToken.getUserId());
         Long id = orderDAO.create(order);
         order.setId(id);
         return id;

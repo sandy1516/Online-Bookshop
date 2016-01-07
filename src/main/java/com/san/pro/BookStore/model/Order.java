@@ -2,6 +2,7 @@ package com.san.pro.BookStore.model;
 
 import com.google.common.base.Objects;
 
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
@@ -10,6 +11,9 @@ import java.util.List;
  */
 public class Order extends Model{
 
+    private Long userId;
+    @Max(50)
+    private String number;
     @NotNull
     private String address;
     @NotNull
@@ -26,7 +30,9 @@ public class Order extends Model{
     private String cardNo;
     @NotNull
     private String cardExpiry;
+
     private int selectedNumberOfBooks;
+
     private float totalAmount;
     @NotNull
     private String orderDate;
@@ -34,8 +40,24 @@ public class Order extends Model{
     private String orderItemList;
 
     private List<Book> orderedBooksList;
-    @NotNull
+
     private OrderStatus orderStatus;
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
 
     public String getAddress() {
         return address;
@@ -150,6 +172,12 @@ public class Order extends Model{
     }
 
     public void merge(Order order) {
+        if(!Objects.equal(null, order.getUserId())) {
+            this.setUserId(order.getUserId());
+        }
+        if(!Objects.equal(null, order.getNumber())) {
+            this.setNumber(order.getNumber());
+        }
         if(!Objects.equal(null, order.getAddress())) {
             this.setAddress(order.getAddress());
         }
