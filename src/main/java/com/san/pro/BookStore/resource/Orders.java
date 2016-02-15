@@ -44,7 +44,7 @@ public class Orders {
     @Produces(MediaType.APPLICATION_JSON)
     public Response get(@PathParam("id") Long id) {
         Order order = this.orderService.getById(id);
-        return Response.status(Response.Status.OK).entity(order).build();
+                return Response.status(Response.Status.OK).entity(order).build();
     }
 
     @GET

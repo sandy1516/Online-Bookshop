@@ -37,7 +37,7 @@ public class OrderService {
         } else {
             order.setNumber("ORD-0" + orderNumber);
         }
-        order.setOrderStatus(OrderStatus.processing);
+        order.setOrderStatus(OrderStatus.confirmed);
         order.setUserId(authToken.getUserId());
         Long id = orderDAO.create(order);
         order.setId(id);
