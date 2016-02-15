@@ -54,3 +54,4 @@ CREATE TABLE `orders` (
   `updated_by` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`,`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
+http://localhost:8080/users/registerhttp://localhost:8080/users/register

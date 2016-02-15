@@ -1,0 +1,85 @@
+POST    http://localhost:8080/users/register
+--------------------------------------------
+Request
+{
+    "emailId": "sandeep@mail.com",
+    "password": "sandeep",
+    "firstName" : "sandeep",
+    "lastName" : "singh",
+    "role" : "user",
+    "userName": "sandy"
+}
+Response
+{
+  "id": 1,
+  "createdAt": null,
+  "createdBy": null,
+  "updatedAt": null,
+  "updatedBy": null,
+  "firstName": "sandeep",
+  "lastName": "singh",
+  "emailId": "sandeep@mail.com",
+  "mobile": 0,
+  "userName": "sandy",
+  "password": null,
+  "role": "user"
+}
+
+
+POST    http://localhost:8080/users/login
+-----------------------------------------
+Request
+{
+    "emailId": "sandeep@mail.com",
+    "password": "sandeep"
+}
+Response
+eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHBpcmF0aW9uIjoxNDU1NTMxMDE1MjgwLCJ1c2VySWQiOjZ9.xzlw1uZ5y4cP9MY8dtVp0FpmIltBvLLLGPO58BxKy0g
+
+
+GET     http://localhost:8080/books
+-----------------------------------
+Response
+[
+  {
+    "id": 1,
+    "createdAt": null,
+    "createdBy": null,
+    "updatedAt": null,
+    "updatedBy": null,
+    "isbn": "bk-001",
+    "bookName": "Core-Java",
+    "author": "Srinivas",
+    "publication": "Sankalp",
+    "edition": "Second Revised",
+    "cost": 2999
+  },
+  ......
+]
+
+
+POST    http://localhost:8080/books
+-----------------------------------
+Request
+{
+    "isbn": "bk-001",
+    "bookName": "Core-Java",
+    "author": "Srinivas",
+    "publication": "Sankalp",
+    "edition": "Second Revised",
+    "cost": 2999
+}
+Response
+{
+    "id": 1,
+    "createdAt": null,
+    "createdBy": null,
+    "updatedAt": null,
+    "updatedBy": null,
+    "isbn": "bk-001",
+    "bookName": "Core-Java",
+    "author": "Srinivas",
+    "publication": "Sankalp",
+    "edition": "Second Revised",
+    "cost": 2999
+}
