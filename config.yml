@@ -7,3 +7,10 @@ database:
   user: root
   password: india@123
   url: jdbc:mysql://localhost:3306/online_bookstore
+server:
+  applicationConnectors:
+  - type: http
+    port: 9090
+  adminConnectors:
+  - type: http
+    port: 9091

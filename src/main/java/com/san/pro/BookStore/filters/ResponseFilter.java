@@ -18,6 +18,6 @@ public class ResponseFilter implements ContainerResponseFilter{
         containerResponseContext.getHeaders()
                 .add("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
         containerResponseContext.getHeaders()
-                .add("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
+                .add("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, OPTIONS, HEAD");
     }
 }
